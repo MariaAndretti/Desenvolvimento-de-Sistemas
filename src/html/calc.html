@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculadora</title>
+    <script> 
+    
+    function calc(){
+        let n1 = Number(document.getElementById('n1').value)
+        let n2 = Number(document.getElementById('n2').value)
+        let op = document.getElementById('op').value
+
+        let data = {
+            num1: n1,
+            num2: n2,
+            op: op
+        }
+        fetch('/calc', {
+
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res) =>{
+            res.json().then((json) => {
+                document.getElementById('resultado').innerHTML = json.result
+            })
+        })
+    }
+    
+    </script>
+</head>
+<body>
+    <form action="">
+        <div><label for="">Numero 1</label><input type="number" name="" id="n1"></div>
+        <div><label for="">Numero 2</label><input type="number" name="" id="n2"></div>
+        <select name="" id="op">
+            <option value="add">+</option>
+            <option value="Sub">-</option>
+            <option value="mul">*</option>
+            <option value="div">/</option>
+        </select>
+        <button type="button" onclick="calc()">Calcular</button>
+    <output id="resultado"></output>
+    </form>
+    <ul class="li" id="item_1"></ul>
+    <ul class="li" id="item_2"></ul>
+    <ul class="li" id="item_3"></ul>
+    <ul class="li" id="item_4"></ul>
+    <ul class="li" id="item_5"></ul>
+    <ul class="li" id="item_6"></ul>
+</body>
+</html>
