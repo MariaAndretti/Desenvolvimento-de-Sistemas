@@ -1,0 +1,64 @@
+.container{
+  text-align: center;
+  padding: 2rem;
+  background: #1e1e1e;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border: 1px solid #333
+}
+
+h1{
+  margin-bottom: 1.5rem;
+  color: cadetblue;
+  font-size: 2.5rem;
+}
+
+.card p{
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+button{
+  background-color: cadetblue;
+  color: black;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.1s, background-color 0.3s;
+  margin: 10px;
+}
+
+button:hover{
+  background-color: cadetblue;
+  transform: translateY(-2);
+}
+
+button:active{
+  transform: scale(0.95);
+}
+
+.reset-btn{
+  background-color: transparent;
+  color: antiquewhite;
+  border: 1px solid antiquewhite;
+}
+
+.reset-btn:hover{
+  background-color: antiquewhite;
+  color: antiquewhite;
+}
+
+.achievement{
+  margin-top: 20px;
+  color: burlywood;
+  font-weight: bold;
+  animation: bounce 0.5s infinite alternate
+}
+
+@keyframes bounce{
+  from {transform:scale(1);}
+  to{transform: scale(1.1);}
+}
