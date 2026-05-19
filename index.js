@@ -1,13 +1,35 @@
-const express = require("express")
-const routes = require("./src/config/routes");
-const dotenv = require('dotenv');
+require('dotenv').config()
 
-dotenv.config();
-let app = express()
-app.use(express.json())
+const database = require('./src/config/database')
 
-routes(app)
+database.authenticate();
 
-app.listen(3000, ()=>{
-  console.log("Server is running on http://127.0.0.1:3000")
+const ws = require('ws')
+
+let server = new ws.Server({ port: 3001 })
+
+const User = require('./src/models.user')
+
+server.on('connection', (client) => {
+    
+    client.on('message', (msg) => {
+        let data = JSON.parse(msg)
+        
+        if (data.action == 'register') {
+            let user = await User.create({ login: data.login })
+            await user.save()
+            
+            client.send(JSON.stringify({ sucess: true, msg: 'User registred!'}));
+        } else if (data.action == 'message_to') {
+            
+        } else if (data.action == 'login') {
+            let user = await User.findOne({ Login})
+            if (user == null) {
+                client.send(JSON.stringify({sucess: false, msg: 'User not found'}))
+            } else {
+                logedUsers[user.login] = client;
+                client['logRef'] = user.login;
+            }
+        }
+    })
 })
